@@ -1,0 +1,95 @@
+class board:
+    def _init_(self):
+        self.c1 = [" "," "," "," "," "," "," "," "," "," "]
+    def display(self):
+       print(" %s  |  %s  |  %s  "%(self.c1[1],self.c1[2],self.c1[3]))
+       print("----------------")
+       print(" %s  |  %s  |  %s  "%(self.c1[4],self.c1[5],self.c1[6]))
+       print("----------------")
+       print(" %s  |  %s  |  %s  "%(self.c1[7],self.c1[8],self.c1[9]))
+    def update_board(self,cell_no,play):
+        if(self.c1[cell_no] == " "):
+            self.c1[cell_no] = play
+    def winner(self,play):
+        if(self.c1[1]==play and self.c1[2]==play and self.c1[3]==play):
+            return True
+        if(self.c1[4]==play and self.c1[5]==play and self.c1[6]==play):
+            return True
+        if(self.c1[7]==play and self.c1[8]==play and self.c1[9]==play):
+            return True
+        if(self.c1[1]==play and self.c1[4]==play and self.c1[7]==play):
+            return True
+        if(self.c1[2]==play and self.c1[5]==play and self.c1[8]==play):
+            return True
+        if(self.c1[3]==play and self.c1[6]==play and self.c1[9]==play):
+            return True
+        if(self.c1[1]==play and self.c1[5]==play and self.c1[9]==play):
+            return True
+        if(self.c1[3]==play and self.c1[5]==play and self.c1[7]==play):
+            return True
+    def reset(self):
+         self.c1 = [" "," "," "," "," "," "," "," "," "," "]
+    def tie(self):
+        used_cells = 0
+        for cells in self.c1:
+            if(cells != " "):
+                used_cells += 1
+        if(used_cells == 9):
+            return True
+        else:
+            return False
+obj = board()
+def header():
+    print("Welcome to TIC TAC TOE..!")
+def refresh():
+    header()
+    obj.display()
+while True:
+    refresh()
+    def x():
+        x_choice = int(input("X) Enter the number (1 to 9) to place : "))      
+        board.update_board(obj,x_choice,"X")
+        refresh()
+    x()
+    if(obj.winner("X")):
+        print("X wins..!")
+        run_again = input("Would you like to play again (Y/N) : ")
+        if(run_again == "Y"):
+           obj.reset()
+           refresh()
+           x()
+        else:
+            print("Thank you for Playing")
+            break
+    if(obj.tie()):
+        print("Its a Tie..!")
+        run_again = input("Would you like to play again (Y/N) : ")
+        if(run_again == "Y"):
+           obj.reset()
+           refresh()
+           x()
+        else:
+            print("Thank you for Playing")
+            break
+    o_choice = int(input("O) Enter the number (1 to 9) to place : "))
+    board.update_board(obj,o_choice,"O")
+    if(obj.winner("O")):
+        print("O wins..!")
+        run_again = input("Would you like to play again (Y/N) : ")
+        if(run_again == "Y"):
+           obj.reset()
+           refresh()
+           x()
+        else:
+            print("Thank you for Playing")
+            break
+    if(obj.tie()):
+        print("Its a Tie..!")
+        run_again = input("Would you like to play again (Y/N) : ")
+        if(run_again == "Y"):
+           obj.reset()
+           refresh()
+           x()
+        else:
+            print("Thank you for Playing")
+            break
